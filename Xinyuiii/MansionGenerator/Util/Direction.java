@@ -8,22 +8,22 @@ import java.util.Iterator;
 import java.util.function.Predicate;
 
 public enum Direction{
-    DOWN(0, 1, -1, "down", Direction.AxisDirection.NEGATIVE, Direction.Axis.Y, new BPos(0, -1, 0)),
-    UP(1, 0, -1, "up", Direction.AxisDirection.POSITIVE, Direction.Axis.Y, new BPos(0, 1, 0)),
-    NORTH(2, 3, 2, "north", Direction.AxisDirection.NEGATIVE, Direction.Axis.Z, new BPos(0, 0, -1)),
-    SOUTH(3, 2, 0, "south", Direction.AxisDirection.POSITIVE, Direction.Axis.Z, new BPos(0, 0, 1)),
-    WEST(4, 5, 1, "west", Direction.AxisDirection.NEGATIVE, Direction.Axis.X, new BPos(-1, 0, 0)),
-    EAST(5, 4, 3, "east", Direction.AxisDirection.POSITIVE, Direction.Axis.X, new BPos(1, 0, 0));
+    DOWN(0, 1, -1, "down", AxisDirection.NEGATIVE, Axis.Y, new BPos(0, -1, 0)),
+    UP(1, 0, -1, "up", AxisDirection.POSITIVE, Axis.Y, new BPos(0, 1, 0)),
+    NORTH(2, 3, 2, "north", AxisDirection.NEGATIVE, Axis.Z, new BPos(0, 0, -1)),
+    SOUTH(3, 2, 0, "south", AxisDirection.POSITIVE, Axis.Z, new BPos(0, 0, 1)),
+    WEST(4, 5, 1, "west", AxisDirection.NEGATIVE, Axis.X, new BPos(-1, 0, 0)),
+    EAST(5, 4, 3, "east", AxisDirection.POSITIVE, Axis.X, new BPos(1, 0, 0));
 
     private final int index;
     private final int opposite;
     private final int horizontalIndex;
-    private final Direction.Axis axis;
+    private final Axis axis;
     private final BPos directionVec;
     private static final Direction[] VALUES = values();
     private static final Direction[] BY_INDEX = Arrays.stream(VALUES).sorted(Comparator.comparingInt((a) -> a.index)).toArray((b) -> new Direction[b]);
     private static final Direction[] BY_HORIZONTAL_INDEX = Arrays.stream(VALUES).filter((a) -> a.getAxis().isHorizontal()).sorted(Comparator.comparingInt((b) -> b.horizontalIndex)).toArray((c) -> new Direction[c]);
-    Direction(int indexIn, int oppositeIn, int horizontalIndexIn, String nameIn, Direction.AxisDirection axisDirectionIn, Direction.Axis axisIn, BPos directionVecIn) {
+    Direction(int indexIn, int oppositeIn, int horizontalIndexIn, String nameIn, AxisDirection axisDirectionIn, Axis axisIn, BPos directionVecIn) {
         this.index = indexIn;
         this.horizontalIndex = horizontalIndexIn;
         this.opposite = oppositeIn;
@@ -81,7 +81,7 @@ public enum Direction{
         return this.directionVec.getZ();
     }
 
-    public Direction.Axis getAxis() {
+    public Axis getAxis() {
         return this.axis;
     }
 
@@ -129,10 +129,10 @@ public enum Direction{
     }
 
     public enum Plane implements Iterable<Direction>, Predicate<Direction> {
-        HORIZONTAL(new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}, new Direction.Axis[]{Direction.Axis.X, Direction.Axis.Z}),
-        VERTICAL(new Direction[]{Direction.UP, Direction.DOWN}, new Direction.Axis[]{Direction.Axis.Y});
+        HORIZONTAL(new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}, new Axis[]{Axis.X, Axis.Z}),
+        VERTICAL(new Direction[]{Direction.UP, Direction.DOWN}, new Axis[]{Axis.Y});
 
-        Plane(Direction[] facingValuesIn, Direction.Axis[] axisValuesIn) {
+        Plane(Direction[] facingValuesIn, Axis[] axisValuesIn) {
         }
 
         public Iterator<Direction> iterator() {

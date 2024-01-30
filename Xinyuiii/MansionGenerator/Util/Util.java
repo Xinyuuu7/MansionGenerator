@@ -2,7 +2,6 @@ package Xinyuiii.MansionGenerator.Util;
 
 import com.seedfinding.mccore.rand.ChunkRand;
 import com.seedfinding.mccore.util.pos.BPos;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.*;
 
@@ -20,12 +19,12 @@ public class Util {
     public static void shuffle(List<?> list, ChunkRand rand) {
         int size = list.size();
         if (size < 5 || list instanceof RandomAccess) {
-            for (int i=size; i>1; i--)
-                swap(list, i-1, rand.nextInt(i));
+            for (int i = size; i > 1; i--)
+                swap(list, i - 1, rand.nextInt(i));
         } else {
             Object[] arr = list.toArray();
-            for (int i=size; i>1; i--)
-                swap(arr, i-1, rand.nextInt(i));
+            for (int i = size; i > 1; i--)
+                swap(arr, i - 1, rand.nextInt(i));
             ListIterator it = list.listIterator();
             for (Object e : arr) {
                 it.next();
@@ -34,7 +33,7 @@ public class Util {
         }
     }
 
-    public static BPos offset(BPos pos,Direction facing, int n) {
+    public static BPos offset(BPos pos, Direction facing, int n) {
         return n == 0 ? pos : new BPos(pos.getX() + facing.getXOffset() * n, pos.getY() + facing.getYOffset() * n, pos.getZ() + facing.getZOffset() * n);
     }
 
@@ -44,7 +43,7 @@ public class Util {
         int i = mirror == Mirror.FRONT_BACK ? a : 0;
         int j = mirror == Mirror.LEFT_RIGHT ? b : 0;
         BPos blockpos = pos;
-        switch(rotation) {
+        switch (rotation) {
             case COUNTERCLOCKWISE_90:
                 blockpos = pos.add(j, 0, a - i);
                 break;
@@ -60,8 +59,8 @@ public class Util {
         return blockpos;
     }
 
-    public static BPos rotate(BPos pos,Rotation rotationIn) {
-        switch(rotationIn) {
+    public static BPos rotate(BPos pos, Rotation rotationIn) {
+        switch (rotationIn) {
             case NONE:
             default:
                 return pos;
