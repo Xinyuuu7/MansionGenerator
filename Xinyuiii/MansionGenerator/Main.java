@@ -35,19 +35,19 @@ public class Main {
                 continue;
             }
             int enderPearl = 0;
-            List<Piece> piecesWanted = new ArrayList<>();
-            for (Piece piece : generator.getPieces()) {
-                if (piece.name.equals("1x2_s2")) {
+            List<Piece> roomsWanted = new ArrayList<>();
+            for (Piece room : generator.getAllRooms()) {
+                if (room.name.equals("1x2_s2")) {
                     enderPearl = enderPearl + 2;
-                    piecesWanted.add(piece);
+                    roomsWanted.add(room);
                 }
             }
             if (enderPearl < 4) {
                 continue;
             }
             System.out.println(seed);
-            for (Piece pieceWanted : piecesWanted) {
-                System.out.println(pieceWanted.pos);
+            for (Piece roomWanted : roomsWanted) {
+                System.out.println(roomWanted.name + " " + roomWanted.pos);
             }
             return;
         }
