@@ -21,17 +21,17 @@ public class Main {
         while (true) {
             long seed = random.nextLong();
             long structureSeed = WorldSeed.toStructureSeed(seed);
-            CPos pos = mansion.getInRegion(structureSeed,0,0,rand);
+            CPos pos = mansion.getInRegion(structureSeed, 0, 0, rand);
             if (pos == null) {
                 continue;
             }
-            OverworldBiomeSource obs = new OverworldBiomeSource(MCVersion.v1_16_1,seed);
-            if (!mansion.canSpawn(pos,obs)) {
+            OverworldBiomeSource obs = new OverworldBiomeSource(MCVersion.v1_16_1, seed);
+            if (!mansion.canSpawn(pos, obs)) {
                 continue;
             }
             OverworldTerrainGenerator otg = new OverworldTerrainGenerator(obs);
             MansionGenerator generator = new MansionGenerator(MCVersion.v1_16_1);
-            if (!generator.generate(otg,pos,rand)) {
+            if (!generator.generate(otg, pos, rand)) {
                 continue;
             }
             int enderPearl = 0;
