@@ -15,9 +15,9 @@ import java.util.List;
 
 public class MansionGenerator {
 
-    MCVersion version;
+    private MCVersion version;
 
-    List<Piece> pieces;
+    private List<Piece> pieces;
 
     MansionGenerator(MCVersion version) {
         this.version = version;
@@ -58,24 +58,60 @@ public class MansionGenerator {
         return false;
     }
 
+    public List<Piece> getAllPieces() {
+        return pieces;
+    }
+
+    public List<Piece> getAllRooms() {
+        List<Piece> rooms = new ArrayList<>();
+        for (Piece piece : pieces) {
+            if (piece.type.isRoom()) {
+                rooms.add(piece);
+            }
+        }
+        return rooms;
+    }
+    
+    public List<Piece> getAllOthers() {
+        List<Piece> others = new ArrayList<>();
+        for (Piece piece : pieces) {
+            if (!piece.type.isRoom()) {
+                others.add(piece);
+            }
+        }
+        return others;
+    }
+
     public static class Piece {
+        public PieceType type;
         public String name;
         public BPos pos;
         public Rotation rotation;
         public Mirror mirror;
 
-        public Piece(String name, BPos pos, Rotation rotation) {
+        public Piece(PieceType type, String name, BPos pos, Rotation rotation) {
+            this.type = type;
             this.name = name;
             this.pos = pos;
             this.rotation = rotation;
             this.mirror = Mirror.NONE;
         }
 
-        public Piece(String name, BPos pos, Rotation rotation, Mirror mirror) {
+        public Piece(PieceType type, String name, BPos pos, Rotation rotation, Mirror mirror) {
+            this.type = type;
             this.name = name;
             this.pos = pos;
             this.rotation = rotation;
             this.mirror = mirror;
+        }
+    }
+
+    public enum PieceType {
+        ROOM,
+        OTHER;
+
+        public boolean isRoom() {
+            return this.equals(ROOM);
         }
     }
 }
