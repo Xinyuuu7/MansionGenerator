@@ -79,26 +79,21 @@ public class Placer {
                         if (woodlandmansionpieces$simplegrid3.get(j1, i1 - 1) == 1 || (woodlandmansionpieces$simplegrid2.get(j1, i1 - 1) & 8388608) == 8388608) {
                             pieceList.add(new Piece("carpet_north", Util.offset(blockpos1, rotation.rotate(Direction.EAST), 1).relative(BlockDirection.UP), rotation));
                         }
-
                         if (woodlandmansionpieces$simplegrid3.get(j1 + 1, i1) == 1 || (woodlandmansionpieces$simplegrid2.get(j1 + 1, i1) & 8388608) == 8388608) {
                             pieceList.add(new Piece("carpet_east", Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.SOUTH), 1), rotation.rotate(Direction.EAST), 5).relative(BlockDirection.UP), rotation));
                         }
-
                         if (woodlandmansionpieces$simplegrid3.get(j1, i1 + 1) == 1 || (woodlandmansionpieces$simplegrid2.get(j1, i1 + 1) & 8388608) == 8388608) {
                             pieceList.add(new Piece(s, Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.SOUTH), 5), rotation.rotate(Direction.WEST), 1), rotation));
                         }
-
                         if (woodlandmansionpieces$simplegrid3.get(j1 - 1, i1) == 1 || (woodlandmansionpieces$simplegrid2.get(j1 - 1, i1) & 8388608) == 8388608) {
                             pieceList.add(new Piece(s1, Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.WEST), 1), rotation.rotate(Direction.NORTH), 1), rotation));
                         }
                     }
                 }
             }
-
             String s2 = l2 == 0 ? "indoors_wall_1" : "indoors_wall_2";
             String s3 = l2 == 0 ? "indoors_door_1" : "indoors_door_2";
             List<Direction> list = new ArrayList<>();
-
             for (int k1 = 0; k1 < woodlandmansionpieces$simplegrid3.height; ++k1) {
                 for (int l1 = 0; l1 < woodlandmansionpieces$simplegrid3.width; ++l1) {
                     boolean flag1 = l2 == 2 && woodlandmansionpieces$simplegrid3.get(l1, k1) == 3;
@@ -115,37 +110,31 @@ public class Placer {
                                 }
                             }
                         }
-
                         Direction direction1 = null;
                         if (!list.isEmpty()) {
                             direction1 = list.get(this.rand.nextInt(list.size()));
                         } else if ((i2 & 1048576) == 1048576) {
                             direction1 = Direction.UP;
                         }
-
                         BPos blockpos3 = Util.offset(blockpos, rotation.rotate(Direction.SOUTH), 8 + (k1 - this.startY) * 8);
                         blockpos3 = Util.offset(blockpos3, rotation.rotate(Direction.EAST), -1 + (l1 - this.startX) * 8);
                         if (Grid.isHouse(woodlandmansionpieces$simplegrid3, l1 - 1, k1) && !grid.isRoomId(woodlandmansionpieces$simplegrid3, l1 - 1, k1, l2, k2)) {
                             pieceList.add(new Piece(direction1 == Direction.WEST ? s3 : s2, blockpos3, rotation));
                         }
-
                         if (woodlandmansionpieces$simplegrid3.get(l1 + 1, k1) == 1 && !flag1) {
                             BPos blockpos2 = Util.offset(blockpos3, rotation.rotate(Direction.EAST), 8);
                             pieceList.add(new Piece(direction1 == Direction.EAST ? s3 : s2, blockpos2, rotation));
                         }
-
                         if (Grid.isHouse(woodlandmansionpieces$simplegrid3, l1, k1 + 1) && !grid.isRoomId(woodlandmansionpieces$simplegrid3, l1, k1 + 1, l2, k2)) {
                             BPos blockpos4 = Util.offset(blockpos3, rotation.rotate(Direction.SOUTH), 7);
                             blockpos4 = Util.offset(blockpos4, rotation.rotate(Direction.EAST), 7);
                             pieceList.add(new Piece(direction1 == Direction.SOUTH ? s3 : s2, blockpos4, rotation.add(Rotation.CLOCKWISE_90)));
                         }
-
                         if (woodlandmansionpieces$simplegrid3.get(l1, k1 - 1) == 1 && !flag1) {
                             BPos blockpos5 = Util.offset(blockpos3, rotation.rotate(Direction.NORTH), 1);
                             blockpos5 = Util.offset(blockpos5, rotation.rotate(Direction.EAST), 7);
                             pieceList.add(new Piece(direction1 == Direction.NORTH ? s3 : s2, blockpos5, rotation.add(Rotation.CLOCKWISE_90)));
                         }
-
                         if (j2 == 65536) {
                             this.addRoom1x1(pieceList, blockpos3, rotation, direction1, awoodlandmansionpieces$roomcollection[l2]);
                         } else if (j2 == 131072 && direction1 != null) {
@@ -157,7 +146,6 @@ public class Placer {
                             if (!grid.isRoomId(woodlandmansionpieces$simplegrid3, l1 + direction2.getXOffset(), k1 + direction2.getZOffset(), l2, k2)) {
                                 direction2 = direction2.getOpposite();
                             }
-
                             this.addRoom2x2(pieceList, blockpos3, rotation, direction2, direction1, awoodlandmansionpieces$roomcollection[l2]);
                         } else if (j2 == 262144 && direction1 == Direction.UP) {
                             this.addRoom2x2Secret(pieceList, blockpos3, rotation, awoodlandmansionpieces$roomcollection[l2]);
@@ -166,14 +154,12 @@ public class Placer {
                 }
             }
         }
-
     }
 
     private void traverseOuterWalls(List<Piece> pieceList, PlacementData placementData, SimpleGrid simpleGrid, Direction direction1, int a, int b, int c, int d) {
         int i = a;
         int j = b;
         Direction direction2 = direction1;
-
         do {
             if (!Grid.isHouse(simpleGrid, i + direction1.getXOffset(), j + direction1.getZOffset())) {
                 this.traverseTurn(pieceList, placementData);
@@ -193,7 +179,6 @@ public class Placer {
                     this.traverseWallPiece(pieceList, placementData);
                 }
             }
-
         } while (i != c || j != d || direction2 != direction1);
     }
 
@@ -314,7 +299,6 @@ public class Placer {
                             blockpos21 = Util.offset(blockpos21, rotation.rotate(Direction.WEST), 3);
                             pieceList.add(new Piece("roof_inner_corner", blockpos21, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
                         }
-
                         if (!Grid.isHouse(simpleGrid1, j1, l - 1)) {
                             pieceList.add(new Piece("roof_corner", blockpos17, rotation.add(Rotation.CLOCKWISE_180)));
                         } else if (Grid.isHouse(simpleGrid1, j1 - 1, l - 1)) {
@@ -366,7 +350,6 @@ public class Placer {
                 s = p_191129_5_.get1x1Secret(this.rand);
             }
         }
-
         BPos blockpos = Util.getZeroPositionWithTransform(new BPos(1, 0, 0), Mirror.NONE, rotation, 7, 7);
         rotation = rotation.add(p_191129_3_);
         blockpos = Util.rotate(blockpos, p_191129_3_);
@@ -426,7 +409,6 @@ public class Placer {
             blockpos = Util.offset(blockpos, rotation.rotate(Direction.NORTH), 0);
             pieces.add(new Piece(roomCollection.get1x2Secret(this.rand), blockpos, rotation));
         }
-
     }
 
     private void addRoom2x2(List<Piece> pieces, BPos pos, Rotation rotation_1, Direction direction_1, Direction direction_2, RoomCollection roomCollection) {
@@ -466,7 +448,6 @@ public class Placer {
             i = 15;
             mirror = Mirror.FRONT_BACK;
         }
-
         BPos blockpos = Util.offset(pos, rotation_1.rotate(Direction.EAST), i);
         blockpos = Util.offset(blockpos, rotation_1.rotate(Direction.SOUTH), j);
         pieces.add(new Piece(roomCollection.get2x2(this.rand), blockpos, rotation, mirror));
