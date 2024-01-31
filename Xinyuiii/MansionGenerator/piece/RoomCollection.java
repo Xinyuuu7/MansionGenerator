@@ -19,5 +19,4 @@ public abstract class RoomCollection {
     public abstract String get2x2(ChunkRand rand);
 
     public abstract String get2x2Secret(ChunkRand rand);
-
 }
