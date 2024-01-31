@@ -1,6 +1,6 @@
 package Xinyuiii.MansionGenerator;
 
-import Xinyuiii.MansionGenerator.Util.Direction;
+import Xinyuiii.MansionGenerator.MansionGenerator.Piece;
 import com.seedfinding.mcbiome.source.OverworldBiomeSource;
 import com.seedfinding.mccore.rand.ChunkRand;
 import com.seedfinding.mccore.rand.seed.WorldSeed;
@@ -9,6 +9,8 @@ import com.seedfinding.mccore.version.MCVersion;
 import com.seedfinding.mcfeature.structure.Mansion;
 import com.seedfinding.mcterrain.terrain.OverworldTerrainGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -29,11 +31,23 @@ public class Main {
             }
             OverworldTerrainGenerator otg = new OverworldTerrainGenerator(obs);
             MansionGenerator generator = new MansionGenerator(MCVersion.v1_16_1);
-            generator.generate(otg,pos,rand);
+            if (!generator.generate(otg,pos,rand)) {
+                continue;
+            }
+            int enderPearl = 0;
+            List<Piece> piecesWanted = new ArrayList<>();
+            for (Piece piece : generator.getPieces()) {
+                if (piece.name.equals("1x2_s2")) {
+                    enderPearl = enderPearl + 2;
+                    piecesWanted.add(piece);
+                }
+            }
+            if (enderPearl < 4) {
+                continue;
+            }
             System.out.println(seed);
-            System.out.println(pos.toBlockPos());
-            for (MansionGenerator.Piece piece : generator.getPieces()) {
-                System.out.println(piece.name + " " + piece.pos);
+            for (Piece pieceWanted : piecesWanted) {
+                System.out.println(pieceWanted.pos);
             }
             return;
         }
