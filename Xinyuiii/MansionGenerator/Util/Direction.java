@@ -135,6 +135,7 @@ public enum Direction{
         Plane(Direction[] facingValuesIn, Axis[] axisValuesIn) {
         }
 
+        @NotNull
         public Iterator<Direction> iterator() {
             return null;
         }
