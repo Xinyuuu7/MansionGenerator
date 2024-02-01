@@ -127,7 +127,4 @@ public class NewXoroChunkRand {
         return i;
     }
 
-    public double triangle(double d, double e) {
-        return d + e * (this.nextDouble() - this.nextDouble());
-    }
 }

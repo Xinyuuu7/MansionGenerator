@@ -3,8 +3,8 @@ package Xinyuiii.MansionGenerator.reecriture.MansionPools;
 import com.seedfinding.mccore.util.pos.BPos;
 
 public class StructureBlock {
-    String name;
-    BPos offset;
+    public String name;
+    public BPos offset;
 
     public StructureBlock(String name, BPos offset) {
         this.name = name;
