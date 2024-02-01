@@ -131,7 +131,7 @@ public enum Direction{
         HORIZONTAL(new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}, new Axis[]{Axis.X, Axis.Z});
         private final Direction[] facingValues;
 
-        Plane(Direction[] facingValuesIn, Direction.Axis[] axisValuesIn) {
+        Plane(Direction[] facingValuesIn, Axis[] axisValuesIn) {
             this.facingValues = facingValuesIn;
         }
 
