@@ -5,6 +5,7 @@ import com.seedfinding.mccore.util.pos.BPos;
 import java.util.*;
 
 public class MansionStructureBlocks {
+    // For version 1.11 to 1.18.2
     public static final HashMap<String, List<StructureBlock>> STRUCTURE_BLOCKS_1_11 = new HashMap<>() {{
         this.put("1x1_a1", List.of());
         this.put("1x1_a2", List.of());
@@ -213,6 +214,8 @@ public class MansionStructureBlocks {
         this.put("wall_flat", List.of());
         this.put("wall_window", List.of());
     }};
+
+    // For version 1.19 +
     public static final HashMap<String, List<StructureBlock>> STRUCTURE_BLOCKS_1_19 = new HashMap<>() {{
         this.put("1x1_a1", List.of());
         this.put("1x1_a2", List.of());
@@ -423,5 +426,4 @@ public class MansionStructureBlocks {
         this.put("wall_flat", List.of());
         this.put("wall_window", List.of());
     }};
-
 }
