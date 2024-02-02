@@ -50,7 +50,6 @@ public class Piece {
     public void decorate(ChunkRand rand, BlockBox chunkBox, MCVersion version) {
         //Using chunkRand means pre1.18
         List<StructureBlock> structureBlocks = MansionStructureBlocks.STRUCTURE_BLOCKS_1_11.get(this.name);
-
         for (StructureBlock structureBlock : structureBlocks) {
             handleStructureBlock(structureBlock, rand, chunkBox, version);
         }
@@ -60,7 +59,6 @@ public class Piece {
         List<StructureBlock> structureBlocks = version.isNewerOrEqualTo(MCVersion.v1_19) ?
                 MansionStructureBlocks.STRUCTURE_BLOCKS_1_19.get(this.name) :
                 MansionStructureBlocks.STRUCTURE_BLOCKS_1_11.get(this.name);
-
         for (StructureBlock structureBlock : structureBlocks) {
             handleStructureBlock(structureBlock, rand, chunkBox, version);
         }
@@ -83,7 +81,6 @@ public class Piece {
                 rand.nextLong();
                 return;
             }
-
             case "Pearl": {
                 long lootTableSeed = rand.nextLong();
                 LootContext context = new LootContext(lootTableSeed);
@@ -92,7 +89,6 @@ public class Piece {
                 loot.add(new Pair<>(pos, itemStacks));
                 return;
             }
-
             case "Axe": {
                 long lootTableSeed = rand.nextLong();
                 LootContext context = new LootContext(lootTableSeed);
@@ -101,7 +97,6 @@ public class Piece {
                 loot.add(new Pair<>(pos, itemStacks));
                 return;
             }
-
             case "Allium": {
                 long lootTableSeed = rand.nextLong();
                 LootContext context = new LootContext(lootTableSeed);
@@ -110,7 +105,6 @@ public class Piece {
                 loot.add(new Pair<>(pos, itemStacks));
                 return;
             }
-
             case "Sampling": {
                 long lootTableSeed = rand.nextLong();
                 LootContext context = new LootContext(lootTableSeed);
@@ -119,17 +113,14 @@ public class Piece {
                 loot.add(new Pair<>(pos, itemStacks));
                 return;
             }
-
             case "Mage": {
                 mobs.add(new Mob(pos, "Evoker"));
                 return;
             }
-
             case "Warrior": {
                 mobs.add(new Mob(pos, "Vindicator"));
                 return;
             }
-
             default: {
             }
         }
@@ -154,7 +145,6 @@ public class Piece {
                 rand.nextLong();
                 return;
             }
-
             case "Pearl": {
                 long lootTableSeed = rand.nextLong();
                 LootContext context = new LootContext(lootTableSeed);
@@ -163,7 +153,6 @@ public class Piece {
                 loot.add(new Pair<>(pos, itemStacks));
                 return;
             }
-
             case "Axe": {
                 long lootTableSeed = rand.nextLong();
                 LootContext context = new LootContext(lootTableSeed);
@@ -172,7 +161,6 @@ public class Piece {
                 loot.add(new Pair<>(pos, itemStacks));
                 return;
             }
-
             case "Allium": {
                 long lootTableSeed = rand.nextLong();
                 LootContext context = new LootContext(lootTableSeed);
@@ -181,7 +169,6 @@ public class Piece {
                 loot.add(new Pair<>(pos, itemStacks));
                 return;
             }
-
             case "Sampling": {
                 long lootTableSeed = rand.nextLong();
                 LootContext context = new LootContext(lootTableSeed);
@@ -190,25 +177,20 @@ public class Piece {
                 loot.add(new Pair<>(pos, itemStacks));
                 return;
             }
-
             case "Mage": {
                 mobs.add(new Mob(pos, "Evoker"));
                 return;
             }
-
             case "Warrior": {
                 mobs.add(new Mob(pos, "Vindicator"));
                 return;
             }
-
             case "Group of Allays": {
                 mobs.add(new Mob(pos, "Allay"));
                 return;
             }
-
             default: {
             }
         }
     }
-
 }
