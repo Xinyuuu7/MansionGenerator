@@ -1,7 +1,5 @@
 package Xinyuiii.MansionGenerator.reecriture;
 
-import com.seedfinding.mccore.util.pos.BPos;
-
 public class NewXoroChunkRand {
     private long seedLo, seedHi;
 
@@ -43,40 +41,6 @@ public class NewXoroChunkRand {
         return a + (long) b;
     }
 
-    public long nextBits(int bit) {
-        return this.xoroNextLong() >>> (64 - bit);
-    }
-
-    public int nextInt() {
-        return (int) this.xoroNextLong();
-    }
-
-    public int nextInt(int bound) {
-        if (bound <= 0) {
-            throw new IllegalArgumentException("Bound must be positive");
-        } else {
-            long i = Integer.toUnsignedLong(this.nextInt());
-            long j = i * (long) bound;
-            long k = j & 4294967295L;
-            if (k < (long) bound) {
-                for (int l = Integer.remainderUnsigned(~bound + 1, bound); k < (long) l; k = j & 4294967295L) {
-                    i = Integer.toUnsignedLong(this.nextInt());
-                    j = i * (long) bound;
-                }
-            }
-            long i1 = j >> 32;
-            return (int) i1;
-        }
-    }
-
-    public float nextFloat() {
-        return (float) this.nextBits(24) * 5.9604645E-8F;
-    }
-
-    public double nextDouble() {
-        return (double) this.nextBits(53) * 1.1102230246251565E-16;
-    }
-
     public long setPopulationSeed(long worldseed, int chunkOriginX, int chunkOriginZ) {
         this.setSeed(worldseed);
         long a = this.nextLong() | 1L;
@@ -92,39 +56,4 @@ public class NewXoroChunkRand {
         this.setSeed(decoratorSeed);
         return decoratorSeed;
     }
-
-    public long setDecoratorSeed(long worldSeed, int chunkOriginX, int chunkOriginZ, int index, int step) {
-        long decoratorSeed = setPopulationSeed(worldSeed, chunkOriginX, chunkOriginZ) + (long) index + (10000L * step);
-        this.setSeed(decoratorSeed);
-        return decoratorSeed;
-    }
-
-    public long setDecoratorSeed(long populationSeed, int salt) {
-        long decoratorSeed = populationSeed + (long) salt;
-        this.setSeed(decoratorSeed);
-        return decoratorSeed;
-    }
-
-    public long setDecoratorSeed(long populationSeed, int index, int step) {
-        long decoratorSeed = populationSeed + (long) index + (10000L * step);
-        this.setSeed(decoratorSeed);
-        return decoratorSeed;
-    }
-
-    public long setPositionSeed(BPos pos) {
-        return this.setPositionSeed(pos.getX(), pos.getY(), pos.getZ());
-    }
-
-    public long setPositionSeed(int x, int y, int z) {
-        long seed = getPositionSeed(x, y, z);
-        this.setSeed(seed);
-        return seed;
-    }
-
-    public static long getPositionSeed(int x, int y, int z) {
-        long i = (x * 3129871L) ^ (long) z * 116129781L ^ (long) y;
-        i = i * i * 42317861L + i * 11L;
-        return i;
-    }
-
 }
