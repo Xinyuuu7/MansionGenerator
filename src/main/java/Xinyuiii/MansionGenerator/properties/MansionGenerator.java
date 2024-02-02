@@ -25,7 +25,6 @@ public class MansionGenerator {
     private int y;
     private Rotation rotation;
     private List<Piece> pieces;
-
     private long worldSeed;
 
     public MansionGenerator(MCVersion version) {
@@ -71,7 +70,7 @@ public class MansionGenerator {
     public void generate(ChunkRand rand) {
         BPos pos = new BPos(chunkX * 16 + 8, y + 1, chunkZ * 16 + 8);
         if (version.isNewerOrEqualTo(MCVersion.v1_18)) pos.subtract(1, 0, 1);
-        //TODO only tested on 1.20.1, also I dont know why
+        //TODO only tested on 1.20.1, also I don't know why
         pieces = new ArrayList<>();
         Grid grid = new Grid(rand);
         Placer placer = new Placer(rand);
@@ -116,10 +115,8 @@ public class MansionGenerator {
 
     public void decorate() {
         List<Piece> generationPieces = new ArrayList<>(pieces);
-
         BlockBox maxbox = generationPieces.stream().map(x -> x.box).reduce((piece1, piece2) -> new BlockBox(Math.min(piece1.minX, piece2.minX), Math.min(piece1.minY, piece2.minY), Math.min(piece1.minZ, piece2.minZ),
                 Math.max(piece1.maxX, piece2.maxX), Math.max(piece1.maxY, piece2.maxY), Math.max(piece1.maxZ, piece2.maxZ))).get();
-
         for (int x = maxbox.minX >> 4; x <= maxbox.maxX >> 4; x++) {
             for (int z = maxbox.minZ >> 4; z <= maxbox.maxZ >> 4; z++) {
                 decorateChunk(generationPieces, x, z);
@@ -127,7 +124,7 @@ public class MansionGenerator {
         }
     }
 
-    public void decorateChunk(List<Piece> generationPieces, int chunkX, int chunkZ) {
+    private void decorateChunk(List<Piece> generationPieces, int chunkX, int chunkZ) {
         BlockBox chunkBox = new BlockBox(chunkX * 16, chunkZ * 16, chunkX * 16 + 15, chunkZ * 16 + 15);
         if (version.isNewerOrEqualTo(MCVersion.v1_18)) {
             NewXoroChunkRand rand = new NewXoroChunkRand();
@@ -146,7 +143,6 @@ public class MansionGenerator {
                 }
             }
         }
-
     }
 
     public List<Piece> getAllPieces() {
@@ -172,6 +168,4 @@ public class MansionGenerator {
         }
         return others;
     }
-
-
 }
