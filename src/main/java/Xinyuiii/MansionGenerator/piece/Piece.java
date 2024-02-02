@@ -5,7 +5,6 @@ import Xinyuiii.MansionGenerator.reecriture.MansionPools.MansionStructureSize;
 import Xinyuiii.MansionGenerator.reecriture.MansionPools.StructureBlock;
 import Xinyuiii.MansionGenerator.reecriture.Mob;
 import Xinyuiii.MansionGenerator.reecriture.NewLootTables;
-import Xinyuiii.MansionGenerator.reecriture.NewXoroChunkRand;
 import Xinyuiii.MansionGenerator.reecriture.util.*;
 import com.seedfinding.mccore.rand.ChunkRand;
 import com.seedfinding.mccore.util.block.BlockBox;
@@ -48,14 +47,6 @@ public class Piece {
     }
 
     public void decorate(ChunkRand rand, BlockBox chunkBox, MCVersion version) {
-        //Using chunkRand means pre1.18
-        List<StructureBlock> structureBlocks = MansionStructureBlocks.STRUCTURE_BLOCKS_1_11.get(this.name);
-        for (StructureBlock structureBlock : structureBlocks) {
-            handleStructureBlock(structureBlock, rand, chunkBox, version);
-        }
-    }
-
-    public void decorate(NewXoroChunkRand rand, BlockBox chunkBox, MCVersion version) {
         List<StructureBlock> structureBlocks = version.isNewerOrEqualTo(MCVersion.v1_19) ?
                 MansionStructureBlocks.STRUCTURE_BLOCKS_1_19.get(this.name) :
                 MansionStructureBlocks.STRUCTURE_BLOCKS_1_11.get(this.name);
@@ -66,69 +57,9 @@ public class Piece {
 
     public void handleStructureBlock(StructureBlock structureBlock, ChunkRand rand, BlockBox chunkBox, MCVersion version) {
         BPos pos = this.pos.add(Util.rotate(structureBlock.offset, this.rotation));
-        if (!chunkBox.contains(pos)) return;
-        String content = structureBlock.name;
-        if (content.startsWith("Chest")) {
-            long lootTableSeed = rand.nextLong();
-            LootContext context = new LootContext(lootTableSeed);
-            LootTable lootTable = NewLootTables.NORMAL_CHEST_1_11;
-            List<ItemStack> itemStacks = lootTable.generate(context);
-            loot.add(new Pair<>(pos, itemStacks));
+        if (!chunkBox.contains(pos)) {
             return;
         }
-        switch (content) {
-            case "Empty": {
-                rand.nextLong();
-                return;
-            }
-            case "Pearl": {
-                long lootTableSeed = rand.nextLong();
-                LootContext context = new LootContext(lootTableSeed);
-                LootTable lootTable = NewLootTables.ENDER_PEARL_TRAPPED_CHEST;
-                List<ItemStack> itemStacks = lootTable.generate(context);
-                loot.add(new Pair<>(pos, itemStacks));
-                return;
-            }
-            case "Axe": {
-                long lootTableSeed = rand.nextLong();
-                LootContext context = new LootContext(lootTableSeed);
-                LootTable lootTable = NewLootTables.IRON_AXE_CHEST;
-                List<ItemStack> itemStacks = lootTable.generate(context);
-                loot.add(new Pair<>(pos, itemStacks));
-                return;
-            }
-            case "Allium": {
-                long lootTableSeed = rand.nextLong();
-                LootContext context = new LootContext(lootTableSeed);
-                LootTable lootTable = NewLootTables.ALLIUM_CHEST;
-                List<ItemStack> itemStacks = lootTable.generate(context);
-                loot.add(new Pair<>(pos, itemStacks));
-                return;
-            }
-            case "Sampling": {
-                long lootTableSeed = rand.nextLong();
-                LootContext context = new LootContext(lootTableSeed);
-                LootTable lootTable = NewLootTables.DARK_OAK_SAPLING_CHEST;
-                List<ItemStack> itemStacks = lootTable.generate(context);
-                loot.add(new Pair<>(pos, itemStacks));
-                return;
-            }
-            case "Mage": {
-                mobs.add(new Mob(pos, "Evoker"));
-                return;
-            }
-            case "Warrior": {
-                mobs.add(new Mob(pos, "Vindicator"));
-                return;
-            }
-            default: {
-            }
-        }
-    }
-
-    public void handleStructureBlock(StructureBlock structureBlock, NewXoroChunkRand rand, BlockBox chunkBox, MCVersion version) {
-        BPos pos = this.pos.add(Util.rotate(structureBlock.offset, this.rotation));
-        if (!chunkBox.contains(pos)) return;
         String content = structureBlock.name;
         if (content.startsWith("Chest")) {
             long lootTableSeed = rand.nextLong();
@@ -189,8 +120,7 @@ public class Piece {
                 mobs.add(new Mob(pos, "Allay"));
                 return;
             }
-            default: {
-            }
+            default: {}
         }
     }
 }
