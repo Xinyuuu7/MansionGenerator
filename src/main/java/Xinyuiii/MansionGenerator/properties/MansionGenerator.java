@@ -1,9 +1,6 @@
 package Xinyuiii.MansionGenerator.properties;
 
-import Xinyuiii.MansionGenerator.piece.Grid;
-import Xinyuiii.MansionGenerator.piece.Piece;
-import Xinyuiii.MansionGenerator.piece.Placer;
-import Xinyuiii.MansionGenerator.reecriture.Mob;
+import Xinyuiii.MansionGenerator.piece.*;
 import Xinyuiii.MansionGenerator.reecriture.NewXoroChunkRand;
 import Xinyuiii.MansionGenerator.reecriture.util.Rotation;
 import com.seedfinding.mccore.rand.ChunkRand;
@@ -147,13 +144,14 @@ public class MansionGenerator {
         List<Piece> rooms = new ArrayList<>();
         for (Piece piece : pieces) {
             if (piece.type.isRoom()) {
+                piece.name = PieceType.ROOM_NAME.get(piece.name);
                 rooms.add(piece);
             }
         }
         return rooms;
     }
 
-    public List<Piece> getAllOthers() {
+    public List<Piece> getAllTechnicalStructures() {
         List<Piece> others = new ArrayList<>();
         for (Piece piece : pieces) {
             if (!piece.type.isRoom()) {
