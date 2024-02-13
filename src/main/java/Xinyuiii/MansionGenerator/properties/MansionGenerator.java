@@ -76,11 +76,8 @@ public class MansionGenerator {
         if (version.isBetween(MCVersion.v1_11, MCVersion.v1_18_2)) {
             pos = new BPos(chunkX * 16 + 8, y + 1, chunkZ * 16 + 8);
         }
-        else if (version.isBetween(MCVersion.v1_19, MCVersion.v1_19_4)) {
+        else {
             pos = new BPos(chunkX * 16 + 7, y, chunkZ * 16 + 7);
-        }
-        else if (version.isNewerOrEqualTo(MCVersion.v1_20)) {
-            pos = new BPos(chunkX * 16 + 8, y, chunkZ * 16 + 8);
         }
         pieces = new ArrayList<>();
         Grid grid = new Grid(rand);
