@@ -80,7 +80,7 @@ public class MansionGenerator {
             pos = new BPos(chunkX * 16 + 7, y, chunkZ * 16 + 7);
         }
         else if (version.isNewerOrEqualTo(MCVersion.v1_20)) {
-            pos = new BPos(chunkX * 16 + 8, y + 1, chunkZ * 16 + 8);
+            pos = new BPos(chunkX * 16 + 8, y, chunkZ * 16 + 8);
         }
         pieces = new ArrayList<>();
         Grid grid = new Grid(rand);
