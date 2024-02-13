@@ -64,18 +64,18 @@ public class Placer {
                     if (woodlandmansionpieces$simplegrid3.get(j1, i1) == 1) {
                         BPos blockpos1 = Util.offset(blockpos, rotation.rotate(Direction.SOUTH), 8 + (i1 - this.startY) * 8);
                         blockpos1 = Util.offset(blockpos1, rotation.rotate(Direction.EAST), (j1 - this.startX) * 8);
-                        pieceList.add(new Piece(PieceType.OTHER, "corridor_floor", blockpos1, rotation));
+                        pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "corridor_floor", blockpos1, rotation));
                         if (woodlandmansionpieces$simplegrid3.get(j1, i1 - 1) == 1 || (woodlandmansionpieces$simplegrid2.get(j1, i1 - 1) & 8388608) == 8388608) {
-                            pieceList.add(new Piece(PieceType.OTHER, "carpet_north", Util.offset(blockpos1, rotation.rotate(Direction.EAST), 1).relative(BlockDirection.UP), rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "carpet_north", Util.offset(blockpos1, rotation.rotate(Direction.EAST), 1).relative(BlockDirection.UP), rotation));
                         }
                         if (woodlandmansionpieces$simplegrid3.get(j1 + 1, i1) == 1 || (woodlandmansionpieces$simplegrid2.get(j1 + 1, i1) & 8388608) == 8388608) {
-                            pieceList.add(new Piece(PieceType.OTHER, "carpet_east", Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.SOUTH), 1), rotation.rotate(Direction.EAST), 5).relative(BlockDirection.UP), rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "carpet_east", Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.SOUTH), 1), rotation.rotate(Direction.EAST), 5).relative(BlockDirection.UP), rotation));
                         }
                         if (woodlandmansionpieces$simplegrid3.get(j1, i1 + 1) == 1 || (woodlandmansionpieces$simplegrid2.get(j1, i1 + 1) & 8388608) == 8388608) {
-                            pieceList.add(new Piece(PieceType.OTHER, s, Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.SOUTH), 5), rotation.rotate(Direction.WEST), 1), rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, s, Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.SOUTH), 5), rotation.rotate(Direction.WEST), 1), rotation));
                         }
                         if (woodlandmansionpieces$simplegrid3.get(j1 - 1, i1) == 1 || (woodlandmansionpieces$simplegrid2.get(j1 - 1, i1) & 8388608) == 8388608) {
-                            pieceList.add(new Piece(PieceType.OTHER, s1, Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.WEST), 1), rotation.rotate(Direction.NORTH), 1), rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, s1, Util.offset(Util.offset(blockpos1, rotation.rotate(Direction.WEST), 1), rotation.rotate(Direction.NORTH), 1), rotation));
                         }
                     }
                 }
@@ -108,21 +108,21 @@ public class Placer {
                         BPos blockpos3 = Util.offset(blockpos, rotation.rotate(Direction.SOUTH), 8 + (k1 - this.startY) * 8);
                         blockpos3 = Util.offset(blockpos3, rotation.rotate(Direction.EAST), -1 + (l1 - this.startX) * 8);
                         if (Grid.isHouse(woodlandmansionpieces$simplegrid3, l1 - 1, k1) && !grid.isRoomId(woodlandmansionpieces$simplegrid3, l1 - 1, k1, l2, k2)) {
-                            pieceList.add(new Piece(PieceType.OTHER, direction1 == Direction.WEST ? s3 : s2, blockpos3, rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, direction1 == Direction.WEST ? s3 : s2, blockpos3, rotation));
                         }
                         if (woodlandmansionpieces$simplegrid3.get(l1 + 1, k1) == 1 && !flag1) {
                             BPos blockpos2 = Util.offset(blockpos3, rotation.rotate(Direction.EAST), 8);
-                            pieceList.add(new Piece(PieceType.OTHER, direction1 == Direction.EAST ? s3 : s2, blockpos2, rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, direction1 == Direction.EAST ? s3 : s2, blockpos2, rotation));
                         }
                         if (Grid.isHouse(woodlandmansionpieces$simplegrid3, l1, k1 + 1) && !grid.isRoomId(woodlandmansionpieces$simplegrid3, l1, k1 + 1, l2, k2)) {
                             BPos blockpos4 = Util.offset(blockpos3, rotation.rotate(Direction.SOUTH), 7);
                             blockpos4 = Util.offset(blockpos4, rotation.rotate(Direction.EAST), 7);
-                            pieceList.add(new Piece(PieceType.OTHER, direction1 == Direction.SOUTH ? s3 : s2, blockpos4, rotation.add(Rotation.CLOCKWISE_90)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, direction1 == Direction.SOUTH ? s3 : s2, blockpos4, rotation.add(Rotation.CLOCKWISE_90)));
                         }
                         if (woodlandmansionpieces$simplegrid3.get(l1, k1 - 1) == 1 && !flag1) {
                             BPos blockpos5 = Util.offset(blockpos3, rotation.rotate(Direction.NORTH), 1);
                             blockpos5 = Util.offset(blockpos5, rotation.rotate(Direction.EAST), 7);
-                            pieceList.add(new Piece(PieceType.OTHER, direction1 == Direction.NORTH ? s3 : s2, blockpos5, rotation.add(Rotation.CLOCKWISE_90)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, direction1 == Direction.NORTH ? s3 : s2, blockpos5, rotation.add(Rotation.CLOCKWISE_90)));
                         }
                         if (j2 == 65536) {
                             this.addRoom1x1(pieceList, blockpos3, rotation, direction1, awoodlandmansionpieces$roomcollection[l2]);
@@ -178,24 +178,24 @@ public class Placer {
                 lvt_8_3_ = Util.offset(pos, rotation.rotate(Direction.EAST), (j - this.startX) * 8);
                 boolean flag = simpleGrid2 != null && Grid.isHouse(simpleGrid2, j, i);
                 if (Grid.isHouse(simpleGrid1, j, i) && !flag) {
-                    pieceList.add(new Piece(PieceType.OTHER, "roof", lvt_8_3_.relative(BlockDirection.UP, 3), rotation));
+                    pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof", lvt_8_3_.relative(BlockDirection.UP, 3), rotation));
                     if (!Grid.isHouse(simpleGrid1, j + 1, i)) {
                         BPos blockpos1 = Util.offset(lvt_8_3_, rotation.rotate(Direction.EAST), 6);
-                        pieceList.add(new Piece(PieceType.OTHER, "roof_front", blockpos1, rotation));
+                        pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_front", blockpos1, rotation));
                     }
                     if (!Grid.isHouse(simpleGrid1, j - 1, i)) {
                         BPos blockpos5 = Util.offset(lvt_8_3_, rotation.rotate(Direction.EAST), 0);
                         blockpos5 = Util.offset(blockpos5, rotation.rotate(Direction.SOUTH), 7);
-                        pieceList.add(new Piece(PieceType.OTHER, "roof_front", blockpos5, rotation.add(Rotation.CLOCKWISE_180)));
+                        pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_front", blockpos5, rotation.add(Rotation.CLOCKWISE_180)));
                     }
                     if (!Grid.isHouse(simpleGrid1, j, i - 1)) {
                         BPos blockpos6 = Util.offset(lvt_8_3_, rotation.rotate(Direction.WEST), 1);
-                        pieceList.add(new Piece(PieceType.OTHER, "roof_front", blockpos6, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
+                        pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_front", blockpos6, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
                     }
                     if (!Grid.isHouse(simpleGrid1, j, i + 1)) {
                         BPos blockpos7 = Util.offset(lvt_8_3_, rotation.rotate(Direction.EAST), 6);
                         blockpos7 = Util.offset(blockpos7, rotation.rotate(Direction.SOUTH), 6);
-                        pieceList.add(new Piece(PieceType.OTHER, "roof_front", blockpos7, rotation.add(Rotation.CLOCKWISE_90)));
+                        pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_front", blockpos7, rotation.add(Rotation.CLOCKWISE_90)));
                     }
                 }
             }
@@ -209,45 +209,45 @@ public class Placer {
                     if (Grid.isHouse(simpleGrid1, i1, k) && flag1) {
                         if (!Grid.isHouse(simpleGrid1, i1 + 1, k)) {
                             BPos blockpos8 = Util.offset(blockpos3, rotation.rotate(Direction.EAST), 7);
-                            pieceList.add(new Piece(PieceType.OTHER, "small_wall", blockpos8, rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "small_wall", blockpos8, rotation));
                         }
                         if (!Grid.isHouse(simpleGrid1, i1 - 1, k)) {
                             BPos blockpos9 = Util.offset(blockpos3, rotation.rotate(Direction.WEST), 1);
                             blockpos9 = Util.offset(blockpos9, rotation.rotate(Direction.SOUTH), 6);
-                            pieceList.add(new Piece(PieceType.OTHER, "small_wall", blockpos9, rotation.add(Rotation.CLOCKWISE_180)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "small_wall", blockpos9, rotation.add(Rotation.CLOCKWISE_180)));
                         }
                         if (!Grid.isHouse(simpleGrid1, i1, k - 1)) {
                             BPos blockpos10 = Util.offset(blockpos3, rotation.rotate(Direction.WEST), 0);
                             blockpos10 = Util.offset(blockpos10, rotation.rotate(Direction.NORTH), 1);
-                            pieceList.add(new Piece(PieceType.OTHER, "small_wall", blockpos10, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "small_wall", blockpos10, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
                         }
                         if (!Grid.isHouse(simpleGrid1, i1, k + 1)) {
                             BPos blockpos11 = Util.offset(blockpos3, rotation.rotate(Direction.EAST), 6);
                             blockpos11 = Util.offset(blockpos11, rotation.rotate(Direction.SOUTH), 7);
-                            pieceList.add(new Piece(PieceType.OTHER, "small_wall", blockpos11, rotation.add(Rotation.CLOCKWISE_90)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "small_wall", blockpos11, rotation.add(Rotation.CLOCKWISE_90)));
                         }
                         if (!Grid.isHouse(simpleGrid1, i1 + 1, k)) {
                             if (!Grid.isHouse(simpleGrid1, i1, k - 1)) {
                                 BPos blockpos12 = Util.offset(blockpos3, rotation.rotate(Direction.EAST), 7);
                                 blockpos12 = Util.offset(blockpos12, rotation.rotate(Direction.NORTH), 2);
-                                pieceList.add(new Piece(PieceType.OTHER, "small_wall_corner", blockpos12, rotation));
+                                pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "small_wall_corner", blockpos12, rotation));
                             }
                             if (!Grid.isHouse(simpleGrid1, i1, k + 1)) {
                                 BPos blockpos13 = Util.offset(blockpos3, rotation.rotate(Direction.EAST), 8);
                                 blockpos13 = Util.offset(blockpos13, rotation.rotate(Direction.SOUTH), 7);
-                                pieceList.add(new Piece(PieceType.OTHER, "small_wall_corner", blockpos13, rotation.add(Rotation.CLOCKWISE_90)));
+                                pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "small_wall_corner", blockpos13, rotation.add(Rotation.CLOCKWISE_90)));
                             }
                         }
                         if (!Grid.isHouse(simpleGrid1, i1 - 1, k)) {
                             if (!Grid.isHouse(simpleGrid1, i1, k - 1)) {
                                 BPos blockpos14 = Util.offset(blockpos3, rotation.rotate(Direction.WEST), 2);
                                 blockpos14 = Util.offset(blockpos14, rotation.rotate(Direction.NORTH), 1);
-                                pieceList.add(new Piece(PieceType.OTHER, "small_wall_corner", blockpos14, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
+                                pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "small_wall_corner", blockpos14, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
                             }
                             if (!Grid.isHouse(simpleGrid1, i1, k + 1)) {
                                 BPos blockpos15 = Util.offset(blockpos3, rotation.rotate(Direction.WEST), 1);
                                 blockpos15 = Util.offset(blockpos15, rotation.rotate(Direction.SOUTH), 8);
-                                pieceList.add(new Piece(PieceType.OTHER, "small_wall_corner", blockpos15, rotation.add(Rotation.CLOCKWISE_180)));
+                                pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "small_wall_corner", blockpos15, rotation.add(Rotation.CLOCKWISE_180)));
                             }
                         }
                     }
@@ -264,17 +264,17 @@ public class Placer {
                         BPos blockpos16 = Util.offset(blockpos4, rotation.rotate(Direction.EAST), 6);
                         if (!Grid.isHouse(simpleGrid1, j1, l + 1)) {
                             BPos blockpos2 = Util.offset(blockpos16, rotation.rotate(Direction.SOUTH), 6);
-                            pieceList.add(new Piece(PieceType.OTHER, "roof_corner", blockpos2, rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_corner", blockpos2, rotation));
                         } else if (Grid.isHouse(simpleGrid1, j1 + 1, l + 1)) {
                             BPos blockpos18 = Util.offset(blockpos16, rotation.rotate(Direction.SOUTH), 5);
-                            pieceList.add(new Piece(PieceType.OTHER, "roof_inner_corner", blockpos18, rotation));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_inner_corner", blockpos18, rotation));
                         }
                         if (!Grid.isHouse(simpleGrid1, j1, l - 1)) {
-                            pieceList.add(new Piece(PieceType.OTHER, "roof_corner", blockpos16, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_corner", blockpos16, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
                         } else if (Grid.isHouse(simpleGrid1, j1 + 1, l - 1)) {
                             BPos blockpos19 = Util.offset(blockpos4, rotation.rotate(Direction.EAST), 9);
                             blockpos19 = Util.offset(blockpos19, rotation.rotate(Direction.NORTH), 2);
-                            pieceList.add(new Piece(PieceType.OTHER, "roof_inner_corner", blockpos19, rotation.add(Rotation.CLOCKWISE_90)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_inner_corner", blockpos19, rotation.add(Rotation.CLOCKWISE_90)));
                         }
                     }
                     if (!Grid.isHouse(simpleGrid1, j1 - 1, l)) {
@@ -282,17 +282,17 @@ public class Placer {
                         blockpos17 = Util.offset(blockpos17, rotation.rotate(Direction.SOUTH), 0);
                         if (!Grid.isHouse(simpleGrid1, j1, l + 1)) {
                             BPos blockpos20 = Util.offset(blockpos17, rotation.rotate(Direction.SOUTH), 6);
-                            pieceList.add(new Piece(PieceType.OTHER, "roof_corner", blockpos20, rotation.add(Rotation.CLOCKWISE_90)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_corner", blockpos20, rotation.add(Rotation.CLOCKWISE_90)));
                         } else if (Grid.isHouse(simpleGrid1, j1 - 1, l + 1)) {
                             BPos blockpos21 = Util.offset(blockpos17, rotation.rotate(Direction.SOUTH), 8);
                             blockpos21 = Util.offset(blockpos21, rotation.rotate(Direction.WEST), 3);
-                            pieceList.add(new Piece(PieceType.OTHER, "roof_inner_corner", blockpos21, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_inner_corner", blockpos21, rotation.add(Rotation.COUNTERCLOCKWISE_90)));
                         }
                         if (!Grid.isHouse(simpleGrid1, j1, l - 1)) {
-                            pieceList.add(new Piece(PieceType.OTHER, "roof_corner", blockpos17, rotation.add(Rotation.CLOCKWISE_180)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_corner", blockpos17, rotation.add(Rotation.CLOCKWISE_180)));
                         } else if (Grid.isHouse(simpleGrid1, j1 - 1, l - 1)) {
                             BPos blockpos22 = Util.offset(blockpos17, rotation.rotate(Direction.SOUTH), 1);
-                            pieceList.add(new Piece(PieceType.OTHER, "roof_inner_corner", blockpos22, rotation.add(Rotation.CLOCKWISE_180)));
+                            pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "roof_inner_corner", blockpos22, rotation.add(Rotation.CLOCKWISE_180)));
                         }
                     }
                 }
@@ -302,18 +302,18 @@ public class Placer {
 
     private void entrance(List<Piece> pieceList, PlacementData placementData) {
         Direction direction = placementData.rotation.rotate(Direction.WEST);
-        pieceList.add(new Piece(PieceType.OTHER, "entrance", Util.offset(placementData.pos, direction, 9), placementData.rotation));
+        pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "entrance", Util.offset(placementData.pos, direction, 9), placementData.rotation));
         placementData.pos = Util.offset(placementData.pos, placementData.rotation.rotate(Direction.SOUTH), 16);
     }
 
     private void traverseWallPiece(List<Piece> pieceList, PlacementData placementData) {
-        pieceList.add(new Piece(PieceType.OTHER, placementData.wallType, Util.offset(placementData.pos, placementData.rotation.rotate(Direction.EAST), 7), placementData.rotation));
+        pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, placementData.wallType, Util.offset(placementData.pos, placementData.rotation.rotate(Direction.EAST), 7), placementData.rotation));
         placementData.pos = Util.offset(placementData.pos, placementData.rotation.rotate(Direction.SOUTH), 8);
     }
 
     private void traverseTurn(List<Piece> pieceList, PlacementData placementData) {
         placementData.pos = Util.offset(placementData.pos, placementData.rotation.rotate(Direction.SOUTH), -1);
-        pieceList.add(new Piece(PieceType.OTHER, "wall_corner", placementData.pos, placementData.rotation));
+        pieceList.add(new Piece(PieceType.TECHNICALSTRUCTURE, "wall_corner", placementData.pos, placementData.rotation));
         placementData.pos = Util.offset(placementData.pos, placementData.rotation.rotate(Direction.SOUTH), -7);
         placementData.pos = Util.offset(placementData.pos, placementData.rotation.rotate(Direction.WEST), -6);
         placementData.rotation = placementData.rotation.add(Rotation.CLOCKWISE_90);
