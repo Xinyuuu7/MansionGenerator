@@ -12,6 +12,7 @@ import com.seedfinding.mccore.util.data.Pair;
 import com.seedfinding.mccore.util.pos.BPos;
 import com.seedfinding.mccore.util.pos.CPos;
 import com.seedfinding.mccore.version.MCVersion;
+import com.seedfinding.mccore.version.UnsupportedVersion;
 import com.seedfinding.mcfeature.loot.item.ItemStack;
 import com.seedfinding.mcterrain.terrain.OverworldTerrainGenerator;
 
@@ -31,9 +32,12 @@ public class MansionGenerator {
         this.version = version;
     }
 
-    public boolean canGenerate(OverworldTerrainGenerator otg, CPos chunk, ChunkRand rand) {
-        this.chunkX = chunk.getX();
-        this.chunkZ = chunk.getZ();
+    public void generate(OverworldTerrainGenerator otg, CPos chunkPos, ChunkRand rand) {
+        if (version.isOlderThan(MCVersion.v1_11)){
+            throw new UnsupportedVersion(version, " mansions");
+        }
+        this.chunkX = chunkPos.getX();
+        this.chunkZ = chunkPos.getZ();
         this.worldSeed = otg.getWorldSeed();
         rand.setCarverSeed(worldSeed, chunkX, chunkZ, version);
         this.rotation = Rotation.getRandom(rand);
@@ -54,12 +58,12 @@ public class MansionGenerator {
         int k1 = otg.getHeightInGround(k + i, l);
         int l1 = otg.getHeightInGround(k + i, l + j);
         this.y = Math.min(Math.min(i1, j1), Math.min(k1, l1));
-        return y >= 60;
+        generate(rand);
     }
 
-    public void generateSkipHeight(long worldSeed, CPos chunk, ChunkRand rand) {
-        this.chunkX = chunk.getX();
-        this.chunkZ = chunk.getZ();
+    public void generateSkipHeight(long worldSeed, CPos chunkPos, ChunkRand rand) {
+        this.chunkX = chunkPos.getX();
+        this.chunkZ = chunkPos.getZ();
         this.worldSeed = worldSeed;
         rand.setCarverSeed(worldSeed, chunkX, chunkZ, version);
         this.rotation = Rotation.getRandom(rand);
@@ -67,34 +71,22 @@ public class MansionGenerator {
         generate(rand);
     }
 
-    public void generate(ChunkRand rand) {
-        BPos pos = new BPos(chunkX * 16 + 8, y + 1, chunkZ * 16 + 8);
-        if (version.isNewerOrEqualTo(MCVersion.v1_18)) pos.subtract(1, 0, 1);
-        //TODO only tested on 1.20.1, also I don't know why
+    private void generate(ChunkRand rand) {
+        BPos pos = null;
+        if (version.isBetween(MCVersion.v1_11, MCVersion.v1_18_2)) {
+            pos = new BPos(chunkX * 16 + 8, y + 1, chunkZ * 16 + 8);
+        }
+        else if (version.isBetween(MCVersion.v1_19, MCVersion.v1_19_4)) {
+            pos = new BPos(chunkX * 16 + 7, y, chunkZ * 16 + 7);
+        }
+        else if (version.isNewerOrEqualTo(MCVersion.v1_20)) {
+            pos = new BPos(chunkX * 16 + 8, y + 1, chunkZ * 16 + 8);
+        }
         pieces = new ArrayList<>();
         Grid grid = new Grid(rand);
         Placer placer = new Placer(rand);
         placer.createMansion(pos, rotation, pieces, grid);
     }
-
-    public List<BPos> getRooms(String name) {
-        return pieces.stream().filter(x -> x.name.equals(name)).map(x -> x.pos).toList();
-    }
-    /*
-    pearl "1x2_s2"
-    allium "1x1_b5"
-    sampling "1x2_a4"
-    axe "1x2_a6"
-    samll store room "1x2_a9"
-    huge store room "2x2_a2"
-    obbi diamond room "1x1_as3"
-    lava diamond room "2x2_s1"
-    large jail "2x2_a1"
-    anvil room "1x2_a3"
-    spider room "1x1_as2"
-    wool room "1x2_a5"
-    melon room "1x2_a8"
-    */
 
     //allay generation is not fixed and can not be predicated
     public List<BPos> getAllays() {
@@ -109,11 +101,11 @@ public class MansionGenerator {
         return pieces.stream().flatMap(x -> x.mobs.stream().filter(y -> y.getName().equals("Vindicator")).map(Mob::getPos)).toList();
     }
 
-    public List<Pair<BPos, List<ItemStack>>> getLoot() {
+    public List<Pair<BPos, List<ItemStack>>> getChests() {
         return pieces.stream().flatMap(x -> x.loot.stream()).toList();
     }
 
-    public void decorate() {
+    public void generateDecoration() {
         List<Piece> generationPieces = new ArrayList<>(pieces);
         BlockBox maxbox = generationPieces.stream().map(x -> x.box).reduce((piece1, piece2) -> new BlockBox(Math.min(piece1.minX, piece2.minX), Math.min(piece1.minY, piece2.minY), Math.min(piece1.minZ, piece2.minZ),
                 Math.max(piece1.maxX, piece2.maxX), Math.max(piece1.maxY, piece2.maxY), Math.max(piece1.maxZ, piece2.maxZ))).get();
@@ -128,7 +120,12 @@ public class MansionGenerator {
         BlockBox chunkBox = new BlockBox(chunkX * 16, chunkZ * 16, chunkX * 16 + 15, chunkZ * 16 + 15);
         if (version.isNewerOrEqualTo(MCVersion.v1_18)) {
             NewXoroChunkRand rand = new NewXoroChunkRand();
-            rand.setDecoratorSeed(worldSeed, chunkX, chunkZ, 40005);//TODO only tested on 1.20.1
+            if (version.isNewerOrEqualTo(MCVersion.v1_19_3)) {
+                rand.setDecoratorSeed(worldSeed,chunkX,chunkZ,40005);
+            }
+            else {
+                rand.setDecoratorSeed(worldSeed,chunkX,chunkZ,40001);
+            }
             for (Piece piece : generationPieces) {
                 if (piece.box.intersects(chunkBox)) {
                     piece.decorate(rand, chunkBox, version);
