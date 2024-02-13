@@ -1,5 +1,6 @@
 package Xinyuiii.MansionGenerator.properties;
 
+import Xinyuiii.MansionGenerator.piece.Piece;
 import com.seedfinding.mccore.rand.ChunkRand;
 import com.seedfinding.mccore.util.data.Pair;
 import com.seedfinding.mccore.util.pos.BPos;
@@ -23,6 +24,9 @@ public class Main {
         MansionGenerator generator = new MansionGenerator(version);
         generator.generateSkipHeight(seed, pos, rand);
         generator.generateDecoration();
+        for (Piece room : generator.getAllRooms()) {
+            System.out.println(room.pos + " " + room.name);
+        }
         for (Pair<BPos, List<ItemStack>> chest : generator.getChests()) {
             System.out.println(chest.getFirst());
             for (ItemStack itemStack : chest.getSecond()) {
