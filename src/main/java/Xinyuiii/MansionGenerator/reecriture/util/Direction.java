@@ -1,6 +1,5 @@
 package Xinyuiii.MansionGenerator.reecriture.util;
 
-import com.google.common.collect.Iterators;
 import com.seedfinding.mccore.util.math.Vec3i;
 import org.jetbrains.annotations.NotNull;
 
@@ -135,13 +134,26 @@ public enum Direction{
             this.facingValues = facingValuesIn;
         }
 
-        @NotNull
-        public Iterator<Direction> iterator() {
-            return Iterators.forArray(this.facingValues);
-        }
-
         public boolean test(Direction direction) {
             return false;
+        }
+
+        @NotNull
+        public Iterator<Direction> iterator() {
+            return new Iterator<>() {
+                private int currentIndex = 0;
+
+                public boolean hasNext() {
+                    return currentIndex < facingValues.length;
+                }
+
+                public Direction next() {
+                    if (!hasNext()) {
+                        throw new NoSuchElementException();
+                    }
+                    return facingValues[currentIndex++];
+                }
+            };
         }
     }
 }
