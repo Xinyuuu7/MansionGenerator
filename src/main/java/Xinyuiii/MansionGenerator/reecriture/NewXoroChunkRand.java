@@ -1,6 +1,8 @@
 package Xinyuiii.MansionGenerator.reecriture;
 
-public class NewXoroChunkRand {
+import com.seedfinding.mccore.rand.ChunkRand;
+
+public class NewXoroChunkRand extends ChunkRand {
     private long seedLo, seedHi;
 
     public void setSeed(long seed0, long seed1) {
@@ -33,7 +35,6 @@ public class NewXoroChunkRand {
         return l3;
     }
 
-    // can get LootTableSeed
     public long nextLong() {
         int a_ = (int) (this.xoroNextLong() >> 32);
         int b = (int) (this.xoroNextLong() >> 32);
