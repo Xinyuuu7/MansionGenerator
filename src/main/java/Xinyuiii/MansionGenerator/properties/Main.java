@@ -18,13 +18,16 @@ public class Main {
 
     public static void test() {
         ChunkRand rand = new ChunkRand();
-        long seed = -1432629000L;
-        CPos pos = (new BPos(-5488, 0, 14624)).toChunkPos();
+        long seed = 7307225956951549610L;
+        CPos pos = (new BPos(-928, 0, -656)).toChunkPos();
         MansionGenerator generator = new MansionGenerator(version);
         generator.generateSkipHeight(seed, pos, rand);
-        generator.decorate();
-        for (Pair<BPos, List<ItemStack>> chest : generator.getLoot()) {
+        generator.generateDecoration();
+        for (Pair<BPos, List<ItemStack>> chest : generator.getChests()) {
             System.out.println(chest.getFirst());
+            for (ItemStack itemStack : chest.getSecond()) {
+                System.out.println(itemStack.getCount() + " " + itemStack.getItem().getName());
+            }
         }
     }
 }
