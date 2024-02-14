@@ -1,7 +1,7 @@
 import os
 import nbtlib
 
-directory = 'nbts'
+directory = 'files'
 filenames = []
 
 for root, dirs, files in os.walk(directory):
